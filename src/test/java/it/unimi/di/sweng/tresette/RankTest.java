@@ -13,7 +13,7 @@ public class RankTest {
 
     @ParameterizedTest
     @CsvSource({
-            "ASS0, DUE, DUE",
+            "ASSO, DUE, DUE",
             "DUE, TRE, TRE",
             "RE, CAVALLO, RE",
             "CAVALLO, FANTE, CAVALLO",
