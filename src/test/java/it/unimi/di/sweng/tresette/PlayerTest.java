@@ -12,10 +12,10 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import static it.unimi.di.sweng.tresette.TestUtils.whenIterated;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @Timeout(2)
 public class PlayerTest {
@@ -102,5 +102,15 @@ public class PlayerTest {
         );
         player.setAttackStrategyChain(strategy);
         assertThat(player.chooseAttackCard()).isEqualTo(Card.get(Rank.DUE, Suit.BASTONI));
+    }
+
+    @Test
+    void chooseAttackCardDefaultTest() {
+        try (var mocked = mockConstruction(TwoStrategy.class)) {
+            Player mockedPlayer = new Player("Carlotta");
+            var attack = mocked.constructed().getFirst();
+            when(attack.chooseCard(any(), any())).thenReturn(Card.get(Rank.DUE, Suit.BASTONI));
+            assertThat(mockedPlayer.chooseAttackCard()).isEqualTo(Card.get(Rank.DUE, Suit.BASTONI));
+        }
     }
 }
