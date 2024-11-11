@@ -43,7 +43,7 @@ public class Player implements Iterable<Card> {
 
     @NotNull
     public Card chooseAnswerCard(@NotNull Card opponent) {
-        return Card.get(Rank.CINQUE, Suit.BASTONI);
+        return answerStrategyChain.chooseCard(cards, opponent);
     }
 
     public int getPoints() {
