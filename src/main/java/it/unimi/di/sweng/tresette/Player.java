@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class Player implements Iterable<Card> {
-    // TODO rendere la classe Iterable sulle carte che ha in mano
 
     private @NotNull
     final String name;
@@ -25,7 +24,12 @@ public class Player implements Iterable<Card> {
 
     public Player(@NotNull String name) {
         this.name = name;
-        //TODO: assegnare strategie di default
+        this.attackStrategyChain = null;
+        this.answerStrategyChain = new HigerSameSuit(
+                new NoPointStrategy(
+                        Strategy.RANDOM
+                )
+        );
     }
 
     @NotNull

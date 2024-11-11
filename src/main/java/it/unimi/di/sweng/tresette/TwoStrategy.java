@@ -18,6 +18,7 @@ public class TwoStrategy implements Strategy {
     private @Nullable Card tworankCard(@NotNull Iterable<Card> cards) {
         for (Card card : cards) {
             if (card.getRank() == Rank.DUE) {
+                System.out.println("TwoStrategy: " + card);
                 return card;
             }
         }
