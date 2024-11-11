@@ -60,8 +60,7 @@ public class Player implements Iterable<Card> {
   }
 
   public void takeDrawnCard(@NotNull Card drawn) {
-      //TODO: assegna nuova carta pescata alle carte in mano al player
-    throw new RuntimeException("NotYetImplemented");
+      cards.add(drawn);
   }
 
   public void setAttackStrategyChain(@NotNull Strategy attackStrategyChain) {
