@@ -26,6 +26,9 @@ public class TwoStrategy implements Strategy {
 
     @Override
     public @NotNull Card chooseCard(@NotNull Iterable<Card> cards, @Nullable Card attackCard) {
-        return null;
+        return Objects.requireNonNullElse(
+                tworankCard(cards),
+                next.chooseCard(cards, attackCard)
+        );
     }
 }
