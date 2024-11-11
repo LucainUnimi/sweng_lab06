@@ -51,7 +51,7 @@ public class StrategyTest {
 
     @Test
     void TwoStrategyTrueTest() {
-        Strategy strategy = new HigerSameSuit(Strategy.RANDOM);
+        Strategy strategy = new TwoStrategy(Strategy.RANDOM);
         Card choosen = strategy.chooseCard(List.of(
                 Card.get(Rank.ASSO, Suit.BASTONI),
                 Card.get(Rank.DUE, Suit.BASTONI),
@@ -59,5 +59,17 @@ public class StrategyTest {
                 Card.get(Rank.QUATTRO, Suit.BASTONI)
         ), null);
         assertThat(choosen).isEqualTo(Card.get(Rank.DUE, Suit.BASTONI));
+    }
+
+    @Test
+    void TwoStrategyTrueFalse() {
+        Strategy strategy = new TwoStrategy(Strategy.RANDOM);
+        Card choosen = strategy.chooseCard(List.of(
+                Card.get(Rank.ASSO, Suit.BASTONI),
+                Card.get(Rank.CINQUE, Suit.BASTONI),
+                Card.get(Rank.TRE, Suit.BASTONI),
+                Card.get(Rank.QUATTRO, Suit.BASTONI)
+        ), null);
+        assertThat(choosen).isEqualTo(Card.get(Rank.ASSO, Suit.BASTONI));
     }
 }
