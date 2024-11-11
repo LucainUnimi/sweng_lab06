@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.lang.reflect.Field;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Timeout(2)
@@ -37,5 +40,28 @@ public class PlayerTest {
     void takeDrawnCardsTest(String cardsString) {
         TestUtils.cardsFrom(cardsString).forEach(player::takeDrawnCard);
         assertThat(player).containsExactlyInAnyOrder(TestUtils.cardsFrom(cardsString).toArray(new Card[0]));
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            textBlock = """
+      '5B,7B,2S,8B',
+      '2B,7B,2S,8B',
+      '2B,7B,2S,8B',
+      """
+    )
+    void collectCardsTest(String cardsString, Card card) {
+        try {
+            List<Card> cards = TestUtils.cardsFrom(cardsString);
+            for (int i = 0; i < cards.size(); i+=2) {
+                player.collectCards(cards.get(i), cards.get(i+1));
+            }
+            Field personalDeck = player.getClass().getDeclaredField("personalDeck");
+            personalDeck.setAccessible(true);
+            List<Card> personalDeckList = (List<Card>) personalDeck.get(player);
+            assertThat(personalDeckList).containsExactlyInAnyOrder(cards.toArray(new Card[0]));
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 }

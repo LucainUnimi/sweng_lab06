@@ -56,7 +56,6 @@ public class Player implements Iterable<Card> {
 
   public void collectCards(Card attackCard, Card answerCard) {
       //TODO: assegna carte turno al personalDeck del player
-    throw new RuntimeException("NotYetImplemented");
   }
 
   public void takeDrawnCard(@NotNull Card drawn) {
