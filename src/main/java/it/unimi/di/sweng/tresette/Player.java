@@ -43,7 +43,7 @@ public class Player implements Iterable<Card> {
 
     @NotNull
     public Card chooseAnswerCard(@NotNull Card opponent) {
-        throw new RuntimeException("NotYetImplemented");
+        return Card.get(Rank.CINQUE, Suit.BASTONI);
     }
 
     public int getPoints() {
