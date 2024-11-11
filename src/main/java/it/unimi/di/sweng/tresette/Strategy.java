@@ -11,7 +11,7 @@ public interface Strategy {
     //      E' possibile anche fare strategie "Ciapa nò" in cui i punti giocano in maniera negativa
     //      (strategia spesso usata senza dirlo dai genitori quando giocano con i figli piccoli)
 
-    Strategy RANDOM = (c, _) -> null;
+    Strategy RANDOM = (c, _) -> c.iterator().next();
 
     // ATTENZIONE: quando attackCard è null vuol dire che è una strategia di attacco,
     // se è diversa da null è strategia di risposta
