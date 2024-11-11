@@ -30,7 +30,7 @@ public class Player implements Iterable<Card> {
 
     @NotNull
     public Card chooseAttackCard() {
-        return Card.get(Rank.ASSO, Suit.SPADE);
+        return attackStrategyChain.chooseCard(cards, null);
     }
 
     @NotNull
