@@ -7,18 +7,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class TwoStrategy implements Strategy {
+public class NoPointStrategy implements Strategy {
 
     Strategy next;
 
-    public TwoStrategy(Strategy next) {
+    public NoPointStrategy(Strategy next) {
         this.next = next;
     }
 
-    private @Nullable Card tworankCard(@NotNull Iterable<Card> cards) {
+    private @Nullable Card noPointCard(@NotNull Iterable<Card> cards) {
         for (Card card : cards) {
-            if (card.getRank() == Rank.DUE) {
-                return card;
+            switch (card.getRank()) {
+                case SETTE, SEI, CINQUE, QUATTRO -> {
+                    return card;
+                }
             }
         }
         return null;
