@@ -4,6 +4,8 @@ import it.unimi.di.sweng.tresette.common.Card;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public class HigerSameSuit implements Strategy{
 
     private final Strategy next;
@@ -24,6 +26,9 @@ public class HigerSameSuit implements Strategy{
     @Override
     public @NotNull Card chooseCard(@NotNull Iterable<Card> cards, @Nullable Card attackCard) {
         assert attackCard != null : "this strategy is desgin to be an answer strategy";
-        return null;
+        return Objects.requireNonNullElse(
+                higerSameSuit(cards, attackCard),
+                next.chooseCard(cards, attackCard)
+        );
     }
 }
