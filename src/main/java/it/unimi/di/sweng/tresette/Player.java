@@ -9,74 +9,77 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class Player implements Iterable<Card> {
-  // TODO rendere la classe Iterable sulle carte che ha in mano
+    // TODO rendere la classe Iterable sulle carte che ha in mano
 
-  private @NotNull final String name;
-  private @NotNull final List<Card> cards = new ArrayList<>();
-  private @NotNull final List<Card> personalDeck = new ArrayList<>();
-  private @NotNull Strategy attackStrategyChain;
-  private @NotNull Strategy answerStrategyChain;
-  private boolean lastTaken = false; //true per il giocatore che vince ultima mano
+    private @NotNull
+    final String name;
+    private @NotNull
+    final List<Card> cards = new ArrayList<>();
+    private @NotNull
+    final List<Card> personalDeck = new ArrayList<>();
+    private @NotNull Strategy attackStrategyChain;
+    private @NotNull Strategy answerStrategyChain;
+    private boolean lastTaken = false; //true per il giocatore che vince ultima mano
 
-  public Player(@NotNull String name) {
-    this.name = name;
-    //TODO: assegnare strategie di default
-  }
+    public Player(@NotNull String name) {
+        this.name = name;
+        //TODO: assegnare strategie di default
+    }
 
-  @NotNull
-  public Card chooseAttackCard() {
-    throw new RuntimeException("NotYetImplemented");
-  }
+    @NotNull
+    public Card chooseAttackCard() {
+        throw new RuntimeException("NotYetImplemented");
+    }
 
-  @NotNull
-  public Card chooseAnswerCard(@NotNull Card opponent) {
-    throw new RuntimeException("NotYetImplemented");
-  }
+    @NotNull
+    public Card chooseAnswerCard(@NotNull Card opponent) {
+        throw new RuntimeException("NotYetImplemented");
+    }
 
-  public int getPoints() {
-    throw new RuntimeException("NotYetImplemented");
-  }
+    public int getPoints() {
+        throw new RuntimeException("NotYetImplemented");
+    }
 
-  @NotNull
-  public String getName() {
-    return name;
-  }
+    @NotNull
+    public String getName() {
+        return name;
+    }
 
-  @Override
-  @NotNull
-  public String toString() {
-    return getName() +
-        " <" + getPoints() + ">" +
-        " " + cards;
-  }
+    @Override
+    @NotNull
+    public String toString() {
+        return getName() +
+                " <" + getPoints() + ">" +
+                " " + cards;
+    }
 
-  public String shout() {
-    return "Ho vinto io (%s) con %d punti".formatted(name, getPoints());
-  }
+    public String shout() {
+        return "Ho vinto io (%s) con %d punti".formatted(name, getPoints());
+    }
 
-  public void collectCards(Card attackCard, Card answerCard) {
-      //TODO: assegna carte turno al personalDeck del player
-    throw new RuntimeException("NotYetImplemented");
-  }
+    public void collectCards(Card attackCard, Card answerCard) {
+        personalDeck.add(attackCard);
+        personalDeck.add(answerCard);
+    }
 
-  public void takeDrawnCard(@NotNull Card drawn) {
-      cards.add(drawn);
-  }
+    public void takeDrawnCard(@NotNull Card drawn) {
+        cards.add(drawn);
+    }
 
-  public void setAttackStrategyChain(@NotNull Strategy attackStrategyChain) {
-    this.attackStrategyChain = attackStrategyChain;
-  }
+    public void setAttackStrategyChain(@NotNull Strategy attackStrategyChain) {
+        this.attackStrategyChain = attackStrategyChain;
+    }
 
-  public void setAnswerStrategyChain(@NotNull Strategy answerStrategyChain) {
-    this.answerStrategyChain = answerStrategyChain;
-  }
+    public void setAnswerStrategyChain(@NotNull Strategy answerStrategyChain) {
+        this.answerStrategyChain = answerStrategyChain;
+    }
 
-  public void setLastTaken() {
-    lastTaken = true;
-  }
+    public void setLastTaken() {
+        lastTaken = true;
+    }
 
-  @Override
-  public @NotNull Iterator<Card> iterator() {
-    return cards.iterator();
-  }
+    @Override
+    public @NotNull Iterator<Card> iterator() {
+        return cards.iterator();
+    }
 }
