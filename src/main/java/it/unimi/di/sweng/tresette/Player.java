@@ -4,10 +4,11 @@ import it.unimi.di.sweng.tresette.common.Card;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Player {
+public class Player implements Iterable<Card> {
   // TODO rendere la classe Iterable sulle carte che ha in mano
 
   private @NotNull final String name;
@@ -73,5 +74,10 @@ public class Player {
 
   public void setLastTaken() {
     lastTaken = true;
+  }
+
+  @Override
+  public @NotNull Iterator<Card> iterator() {
+    return null;
   }
 }
