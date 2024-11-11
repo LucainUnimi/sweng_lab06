@@ -78,6 +78,6 @@ public class Player implements Iterable<Card> {
 
   @Override
   public @NotNull Iterator<Card> iterator() {
-    return null;
+    return cards.iterator();
   }
 }
