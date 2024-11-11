@@ -24,7 +24,11 @@ public class Player implements Iterable<Card> {
 
     public Player(@NotNull String name) {
         this.name = name;
-        this.attackStrategyChain = null;
+        this.attackStrategyChain = new TwoStrategy(
+                new NoPointStrategy(
+                        Strategy.RANDOM
+                )
+        );
         this.answerStrategyChain = new HigerSameSuit(
                 new NoPointStrategy(
                         Strategy.RANDOM
