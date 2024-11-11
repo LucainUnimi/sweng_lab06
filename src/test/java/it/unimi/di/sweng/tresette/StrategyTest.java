@@ -72,4 +72,28 @@ public class StrategyTest {
         ), null);
         assertThat(choosen).isEqualTo(Card.get(Rank.ASSO, Suit.BASTONI));
     }
+
+    @Test
+    void NoPointStrategyTest() {
+        Strategy strategy = new NoPointStrategy(Strategy.RANDOM);
+        Card choosen = strategy.chooseCard(List.of(
+                Card.get(Rank.ASSO, Suit.BASTONI),
+                Card.get(Rank.CINQUE, Suit.BASTONI),
+                Card.get(Rank.TRE, Suit.BASTONI),
+                Card.get(Rank.FANTE, Suit.BASTONI)
+        ), null);
+        assertThat(choosen).isEqualTo(Card.get(Rank.CINQUE, Suit.BASTONI));
+    }
+
+    @Test
+    void NoPointStrategyFalseTest() {
+        Strategy strategy = new NoPointStrategy(Strategy.RANDOM);
+        Card choosen = strategy.chooseCard(List.of(
+                Card.get(Rank.ASSO, Suit.BASTONI),
+                Card.get(Rank.CAVALLO, Suit.BASTONI),
+                Card.get(Rank.TRE, Suit.BASTONI),
+                Card.get(Rank.FANTE, Suit.BASTONI)
+        ), null);
+        assertThat(choosen).isEqualTo(Card.get(Rank.ASSO, Suit.BASTONI));
+    }
 }
