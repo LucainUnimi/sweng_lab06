@@ -24,4 +24,16 @@ public class StrategyTest {
         ), null);
         assertThat(choosen).isEqualTo(Card.get(Rank.ASSO, Suit.BASTONI));
     }
+
+    @Test
+    void HigherSameSuitTest() {
+        Strategy strategy = new HigerSameSuit(Strategy.RANDOM);
+        Card choosen = strategy.chooseCard(List.of(
+                Card.get(Rank.ASSO, Suit.BASTONI),
+                Card.get(Rank.DUE, Suit.BASTONI),
+                Card.get(Rank.TRE, Suit.BASTONI),
+                Card.get(Rank.QUATTRO, Suit.BASTONI)
+        ), Card.get(Rank.DUE, Suit.BASTONI));
+        assertThat(choosen).isEqualTo(Card.get(Rank.TRE, Suit.BASTONI));
+    }
 }
