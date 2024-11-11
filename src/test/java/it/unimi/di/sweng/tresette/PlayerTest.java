@@ -113,4 +113,21 @@ public class PlayerTest {
             assertThat(mockedPlayer.chooseAttackCard()).isEqualTo(Card.get(Rank.DUE, Suit.BASTONI));
         }
     }
+
+    @Test
+    void chooseAnswerCardTest() {
+        var strategy = mock(Strategy.class);
+        when(strategy.chooseCard(any(), any())).thenReturn(
+                new HigerSameSuit(Strategy.RANDOM).chooseCard(
+                        List.of(
+                                Card.get(Rank.ASSO, Suit.BASTONI),
+                                Card.get(Rank.DUE, Suit.BASTONI),
+                                Card.get(Rank.TRE, Suit.BASTONI),
+                                Card.get(Rank.QUATTRO, Suit.BASTONI)
+                        ), Card.get(Rank.CAVALLO, Suit.BASTONI)
+                )
+        );
+        player.setAnswerStrategyChain(strategy);
+        assertThat(player.chooseAnswerCard(Card.get(Rank.CAVALLO, Suit.BASTONI))).isEqualTo(Card.get(Rank.ASSO, Suit.BASTONI));
+    }
 }
