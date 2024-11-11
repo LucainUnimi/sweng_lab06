@@ -37,7 +37,14 @@ public class Player implements Iterable<Card> {
     }
 
     public int getPoints() {
-        throw new RuntimeException("NotYetImplemented");
+        int points = 0;
+        for(Card card : personalDeck) {
+            switch (card.getRank()) {
+                case ASSO -> points += 3;
+                case RE, FANTE, CAVALLO, DUE, TRE -> points += 1;
+            }
+        }
+        return points / 3;
     }
 
     @NotNull
