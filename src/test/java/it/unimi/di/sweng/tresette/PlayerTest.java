@@ -4,6 +4,8 @@ import it.unimi.di.sweng.tresette.common.Card;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,5 +24,18 @@ public class PlayerTest {
         for (Card card : player) {
             assertThat(card).isNotNull();
         }
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            textBlock = """
+      '5B,7B,2S,8B'
+      '2B,7B,2S,8B'
+      '2B,7B,2S,8B'
+      """
+    )
+    void takeDrawnCardsTest(String cardsString) {
+        TestUtils.cardsFrom(cardsString).forEach(player::takeDrawnCard);
+        assertThat(player).containsExactlyInAnyOrder(TestUtils.cardsFrom(cardsString).toArray(new Card[0]));
     }
 }
