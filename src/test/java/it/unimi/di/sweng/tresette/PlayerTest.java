@@ -32,10 +32,10 @@ public class PlayerTest {
     @ParameterizedTest
     @CsvSource(
             textBlock = """
-      '5B,7B,2S,8B'
-      '2B,7B,2S,8B'
-      '2B,7B,2S,8B'
-      """
+                    '5B,7B,2S,8B'
+                    '2B,7B,2S,8B'
+                    '2B,7B,2S,8B'
+                    """
     )
     void takeDrawnCardsTest(String cardsString) {
         TestUtils.cardsFrom(cardsString).forEach(player::takeDrawnCard);
@@ -45,16 +45,16 @@ public class PlayerTest {
     @ParameterizedTest
     @CsvSource(
             textBlock = """
-      '5B,7B,2S,8B',
-      '2B,7B,2S,8B',
-      '2B,7B,2S,8B',
-      """
+                    '5B,7B,2S,8B',
+                    '2B,7B,2S,8B',
+                    '2B,7B,2S,8B',
+                    """
     )
     void collectCardsTest(String cardsString, Card card) {
         try {
             List<Card> cards = TestUtils.cardsFrom(cardsString);
-            for (int i = 0; i < cards.size(); i+=2) {
-                player.collectCards(cards.get(i), cards.get(i+1));
+            for (int i = 0; i < cards.size(); i += 2) {
+                player.collectCards(cards.get(i), cards.get(i + 1));
             }
             Field personalDeck = player.getClass().getDeclaredField("personalDeck");
             personalDeck.setAccessible(true);
@@ -64,4 +64,22 @@ public class PlayerTest {
             System.err.println(e);
         }
     }
+
+    @ParameterizedTest
+    @CsvSource(textBlock = """
+            'AB,4B,AS,5B', 2
+            '2B,7B,2S,8B,3C,8C', 1
+            '2C,6S,3C,8B', 1
+            """)
+    void getPointsTest(String cardsString, int point) {
+        List<Card> cards = TestUtils.cardsFrom(cardsString);
+        for (int i = 0; i < cards.size(); i += 2) {
+            player.collectCards(
+                    cards.get(i),
+                    cards.get(i + 1)
+            );
+        }
+        assertThat(player.getPoints()).isEqualTo(point);
+    }
+
 }

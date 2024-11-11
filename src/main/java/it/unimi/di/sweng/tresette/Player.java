@@ -37,7 +37,7 @@ public class Player implements Iterable<Card> {
     }
 
     public int getPoints() {
-        throw new RuntimeException("NotYetImplemented");
+        return 0;
     }
 
     @NotNull
