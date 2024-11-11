@@ -1,6 +1,8 @@
 package it.unimi.di.sweng.tresette;
 
 import it.unimi.di.sweng.tresette.common.Card;
+import it.unimi.di.sweng.tresette.common.Rank;
+import it.unimi.di.sweng.tresette.common.Suit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class Player implements Iterable<Card> {
 
     @NotNull
     public Card chooseAttackCard() {
-        throw new RuntimeException("NotYetImplemented");
+        return attackStrategyChain.chooseCard(cards, null);
     }
 
     @NotNull

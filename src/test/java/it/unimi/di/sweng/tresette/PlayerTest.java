@@ -1,6 +1,8 @@
 package it.unimi.di.sweng.tresette;
 
 import it.unimi.di.sweng.tresette.common.Card;
+import it.unimi.di.sweng.tresette.common.Rank;
+import it.unimi.di.sweng.tresette.common.Suit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
@@ -11,6 +13,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @Timeout(2)
 public class PlayerTest {
@@ -82,4 +87,20 @@ public class PlayerTest {
         assertThat(player.getPoints()).isEqualTo(point);
     }
 
+    @Test
+    void chooseAttackCardTest() {
+        var strategy = mock(Strategy.class);
+        when(strategy.chooseCard(any(), any())).thenReturn(
+                new TwoStrategy(Strategy.RANDOM).chooseCard(
+                        List.of(
+                                Card.get(Rank.ASSO, Suit.BASTONI),
+                                Card.get(Rank.DUE, Suit.BASTONI),
+                                Card.get(Rank.TRE, Suit.BASTONI),
+                                Card.get(Rank.QUATTRO, Suit.BASTONI)
+                        ), null
+                )
+        );
+        player.setAttackStrategyChain(strategy);
+        assertThat(player.chooseAttackCard()).isEqualTo(Card.get(Rank.DUE, Suit.BASTONI));
+    }
 }
