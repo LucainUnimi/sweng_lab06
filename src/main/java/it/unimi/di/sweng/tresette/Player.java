@@ -58,6 +58,7 @@ public class Player implements Iterable<Card> {
                 case RE, FANTE, CAVALLO, DUE, TRE -> points += 1;
             }
         }
+        if (lastTaken) points += 1;
         return points / 3;
     }
 
