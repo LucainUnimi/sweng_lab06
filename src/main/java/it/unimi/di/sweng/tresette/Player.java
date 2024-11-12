@@ -38,12 +38,16 @@ public class Player implements Iterable<Card> {
 
     @NotNull
     public Card chooseAttackCard() {
-        return attackStrategyChain.chooseCard(cards, null);
+        Card card = attackStrategyChain.chooseCard(cards, null);
+        cards.remove(card);
+        return card;
     }
 
     @NotNull
     public Card chooseAnswerCard(@NotNull Card opponent) {
-        return answerStrategyChain.chooseCard(cards, opponent);
+        Card card = answerStrategyChain.chooseCard(cards, opponent);
+        cards.remove(card);
+        return card;
     }
 
     public int getPoints() {
