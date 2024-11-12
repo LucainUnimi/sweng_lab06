@@ -39,8 +39,8 @@ public class Game {
                 StreamSupport.stream(opponentOf(attackPlayer).getCards().spliterator(), false)
                         .allMatch(card -> card.getSuit() != attackCard.getSuit()) : "Strategia difesa ha scelto una carta non valida";
 
-        //if (attackerWins(attackCard, answerCard)) attackPlayer.collectCards(attackCard, answerCard);
-        //else opponentOf(attackPlayer).collectCards(attackCard, answerCard);
+        if (attackerWins(attackCard, answerCard)) attackPlayer.collectCards(attackCard, answerCard);
+        else opponentOf(attackPlayer).collectCards(attackCard, answerCard);
 
         attackPlayer = opponentOf(attackPlayer);
     }
@@ -48,6 +48,18 @@ public class Game {
     private boolean attackerWins(@NotNull Card attackCard, @NotNull Card answerCard) {
         return attackCard.getSuit() != answerCard.getSuit() ||
                 attackCard.getRank().tresetteCompare(answerCard.getRank()) < 0;
+    }
+
+    private void distributeCard() {
+            for (Player player : players) {
+                player.takeDrawnCard(deck.draw());
+        }
+    }
+
+    private void distributeInitialCards() {
+        for (int i = 0; i < 3; i++) {
+            distributeCard();
+        }
     }
 
     public @NotNull String playGame() {
