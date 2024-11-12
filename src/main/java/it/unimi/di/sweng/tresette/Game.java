@@ -40,9 +40,10 @@ public class Game {
                         .allMatch(card -> card.getSuit() != attackCard.getSuit()) : "Strategia difesa ha scelto una carta non valida";
 
         if (attackerWins(attackCard, answerCard)) attackPlayer.collectCards(attackCard, answerCard);
-        else opponentOf(attackPlayer).collectCards(attackCard, answerCard);
-
-        attackPlayer = opponentOf(attackPlayer);
+        else {
+            attackPlayer = opponentOf(attackPlayer);
+            opponentOf(attackPlayer).collectCards(attackCard, answerCard);
+        }
     }
 
     private boolean attackerWins(@NotNull Card attackCard, @NotNull Card answerCard) {
@@ -51,24 +52,25 @@ public class Game {
     }
 
     private void distributeCard() {
-            for (Player player : players) {
-                player.takeDrawnCard(deck.draw());
+        for (Player player : players) {
+            player.takeDrawnCard(deck.draw());
         }
     }
 
     private void distributeInitialCards() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 10; i++) {
             distributeCard();
         }
     }
 
     public @NotNull String playGame() {
         //TODO gestisce l'intera partita:
-        // - distribuzione delle carte iniziali
-        // - l'invocazione dei turni
-        // - il pescare carte dal mazzo quando necessario
-        // - finiti i turni, assegna il punto dell'ultima presa e calcola vincitore
-        // - ritorna una stringa in cui viene detto chi ha vinto e con che punteggio
-        throw new RuntimeException("NotYetImplemented");
+        distributeInitialCards();
+        for (int i = 0; i < 20; i++) {
+            playTurn();
+            if (!deck.isEmpty()) distributeCard();
+        }
+        attackPlayer.setLastTaken();
+        return players[0].getPoints() > players[1].getPoints() ? players[0].shout() : players[1].shout();
     }
 }
