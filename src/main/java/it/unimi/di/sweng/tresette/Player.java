@@ -99,6 +99,10 @@ public class Player implements Iterable<Card> {
         lastTaken = true;
     }
 
+    public List<Card> getCards() {
+        return List.copyOf(cards);
+    }
+
     @Override
     public @NotNull Iterator<Card> iterator() {
         return cards.iterator();
